@@ -1,16 +1,16 @@
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TeamListTest {
 
     @Test
-    public void shouldLoadTeamsFromTextFile() throws IOException {
+    public void shouldLoadTeamsFromTextFile() throws InvalidFileException {
         List<String> expectedTeams = new ArrayList<>();
         expectedTeams.add("A");
         expectedTeams.add("B");
@@ -29,9 +29,9 @@ public class TeamListTest {
         File file = new File("this-file-does-not-exists.txt");
 
         TeamList teamList = new TeamList();
-        String message = "Expected load() to throw IOException, but it didn't";
+        String message = "Expected load() to throw MissingFileException, but it didn't";
 
-        assertThrows(IOException.class, () -> teamList.load(file), message);
+        assertThrows(MissingFileException.class, () -> teamList.load(file), message);
     }
 
     @Test

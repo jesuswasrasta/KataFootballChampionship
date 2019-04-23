@@ -6,9 +6,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TeamList {
-    public List<String> load(File file) throws IOException {
+    public List<String> load(File file) throws InvalidFileException {
         List<String> teams = new ArrayList<>();
-        teams = Files.lines(file.toPath()).collect(Collectors.toList());
+
+        if (!file.exists()) {
+            throw new MissingFileException(String.format("File %s is missing!", file.getAbsolutePath()));
+        }
+
+        try {
+            teams = Files.lines(file.toPath()).collect(Collectors.toList());
+            if (teams.isEmpty()){
+                throw new EmptyFileException("File is empty!");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return teams;
     }
 }
