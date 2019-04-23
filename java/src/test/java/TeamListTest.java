@@ -33,4 +33,15 @@ public class TeamListTest {
 
         assertThrows(IOException.class, () -> teamList.load(file), message);
     }
+
+    @Test
+    void shouldThrowAnExceptionIfFileIsEmpty() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("empty.txt").getFile());
+
+        TeamList teamList = new TeamList();
+        String message = "Expected load() to throw EmptyFileException, but it didn't";
+
+        assertThrows(EmptyFileException.class, () -> teamList.load(file), message);
+    }
 }
