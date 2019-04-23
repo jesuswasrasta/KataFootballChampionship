@@ -1,8 +1,18 @@
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TeamList {
-    public List<String> load(String filename) {
-        return new ArrayList<>();
+    public List<String> load(File file) {
+        List<String> teams = new ArrayList<>();
+        try {
+            teams = Files.lines(file.toPath()).collect(Collectors.toList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return teams;
     }
 }
