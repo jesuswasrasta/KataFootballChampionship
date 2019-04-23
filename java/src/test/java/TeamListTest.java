@@ -1,18 +1,16 @@
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TeamListTest {
 
     @Test
-    public void shouldLoadTeamsFromTextFile() {
+    public void shouldLoadTeamsFromTextFile() throws IOException {
         List<String> expectedTeams = new ArrayList<>();
         expectedTeams.add("A");
         expectedTeams.add("B");
@@ -31,9 +29,8 @@ public class TeamListTest {
         File file = new File("this-file-does-not-exists.txt");
 
         TeamList teamList = new TeamList();
-        String message = "Expected load() to throw FileNotFoundException, but it didn't";
+        String message = "Expected load() to throw IOException, but it didn't";
 
-        FileNotFoundException thrown =  assertThrows(FileNotFoundException.class, () -> teamList.load(file), message);
-        assertTrue(thrown.getMessage().contains("File does not exists! Verify name and path."));
+        assertThrows(IOException.class, () -> teamList.load(file), message);
     }
 }

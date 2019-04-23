@@ -6,13 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TeamList {
-    public List<String> load(File file) {
+    public List<String> load(File file) throws IOException {
         List<String> teams = new ArrayList<>();
-        try {
-            teams = Files.lines(file.toPath()).collect(Collectors.toList());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        teams = Files.lines(file.toPath()).collect(Collectors.toList());
         return teams;
     }
 }
