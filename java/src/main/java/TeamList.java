@@ -18,6 +18,9 @@ public class TeamList {
             if (teams.isEmpty()){
                 throw new EmptyFileException("File is empty!");
             }
+            if (teams.size() == 1){
+                throw new InvalidFileException("File contains only 1 team!");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
