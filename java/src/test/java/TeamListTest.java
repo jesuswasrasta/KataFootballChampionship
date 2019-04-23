@@ -44,4 +44,15 @@ public class TeamListTest {
 
         assertThrows(EmptyFileException.class, () -> teamList.load(file), message);
     }
+
+    @Test
+    void shouldThrowAnExceptionIfFileContainsOnlyOneLine() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("only-one-team.txt").getFile());
+
+        TeamList teamList = new TeamList();
+        String message = "Expected load() to throw InvalidFileException, but it didn't";
+
+        assertThrows(InvalidFileException.class, () -> teamList.load(file), message);
+    }
 }
