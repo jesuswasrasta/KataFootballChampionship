@@ -29,4 +29,28 @@ public class Teams {
     public int hashCode() {
         return Objects.hash(teams);
     }
+
+    public List<Team> toList() {
+        return teams;
+    }
+
+    public Team[] toArray() {
+        return teams.toArray(new Team[0]);
+    }
+
+    public int size() {
+        return teams.size();
+    }
+
+    public void addAll(Teams teams) {
+        this.teams.addAll(teams.toList());
+    }
+
+    public Team remove(int i) {
+        return this.teams.remove(i);
+    }
+
+    public void add(int i, Team team) {
+        this.teams.add(i, team);
+    }
 }

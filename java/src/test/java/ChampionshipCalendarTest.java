@@ -20,14 +20,14 @@ public class ChampionshipCalendarTest {
         turn1.add(matchAB);
         turn1.add(matchCD);
 
-        Match matchAC = new Match(teamA, teamC);
-        Match matchBD = new Match(teamB, teamD);
+        Match matchAC = new Match(teamD, teamA);
+        Match matchBD = new Match(teamB, teamC);
         Turn turn2 = new Turn();
         turn2.add(matchAC);
         turn2.add(matchBD);
 
-        Match matchAD = new Match(teamA, teamD);
-        Match matchCB = new Match(teamC, teamB);
+        Match matchAD = new Match(teamC, teamA);
+        Match matchCB = new Match(teamB, teamD);
         Turn turn3 = new Turn();
         turn3.add(matchAD);
         turn3.add(matchCB);
@@ -40,10 +40,7 @@ public class ChampionshipCalendarTest {
 
         ClassLoader classLoader = getClass().getClassLoader();
         TeamsFile teamsFile = new TeamsFile();
-        teamsFile.load(classLoader.getResource("teams.txt").getFile());
-
-        TeamList teamList = new TeamList();
-        Teams actualTeams = teamList.load(teamsFile);
+        Teams actualTeams = teamsFile.load(classLoader.getResource("teams.txt").getFile());
 
         ChampionshipCalendar calendar = new ChampionshipCalendar(actualTeams);
         Turns actualTurns = calendar.generate();
