@@ -1,5 +1,5 @@
 public class TeamsFile {
-    public TeamsFile(String fullname) {
-
+    public Teams load(String fullname) {
+        return null;
     }
 }

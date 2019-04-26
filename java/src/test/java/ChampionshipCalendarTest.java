@@ -39,8 +39,8 @@ public class ChampionshipCalendarTest {
 
 
         ClassLoader classLoader = getClass().getClassLoader();
-//        File file = new File(classLoader.getResource("teams.txt").getFile());
-        TeamsFile teamsFile = new TeamsFile(classLoader.getResource("teams.txt").getFile());
+        TeamsFile teamsFile = new TeamsFile();
+        teamsFile.load(classLoader.getResource("teams.txt").getFile());
 
         TeamList teamList = new TeamList();
         Teams actualTeams = teamList.load(teamsFile);
