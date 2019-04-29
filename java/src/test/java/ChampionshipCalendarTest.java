@@ -20,17 +20,17 @@ public class ChampionshipCalendarTest {
         turn1.add(matchAB);
         turn1.add(matchCD);
 
-        Match matchAC = new Match(teamD, teamA);
-        Match matchBD = new Match(teamB, teamC);
+        Match matchAC = new Match(teamA, teamC);
+        Match matchBD = new Match(teamB, teamD);
         Turn turn2 = new Turn();
         turn2.add(matchAC);
         turn2.add(matchBD);
 
-        Match matchAD = new Match(teamC, teamA);
-        Match matchCB = new Match(teamB, teamD);
+        Match matchAD = new Match(teamA, teamD);
+        Match matchBC = new Match(teamB, teamC);
         Turn turn3 = new Turn();
         turn3.add(matchAD);
-        turn3.add(matchCB);
+        turn3.add(matchBC);
 
         Turns expectedTurns = new Turns();
         expectedTurns.add(turn1);

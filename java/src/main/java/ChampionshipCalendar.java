@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.List;
+
 public class ChampionshipCalendar {
     private final Teams teams;
 
@@ -9,61 +12,9 @@ public class ChampionshipCalendar {
         Teams teamsList = new Teams();
         teamsList.addAll(teams);
 
-        Turns turns = new Turns();
-        turns.addAll(getTurns(teamsList));
-        System.out.println("1: " + turns);
-
-        Teams teamsList2 = new Teams();
-        teamsList2.addAll(teamsList);
-        shift(teamsList2, 1);
-        Turns turns2 = getTurns(teamsList2);
-        System.out.println("2: " + turns2);
-        turns.addAll(turns2);
-
-        Teams teamsList3 = new Teams();
-        teamsList3.addAll(teamsList2);
-        swap(teamsList3, 3);
-        Turns turns3 = getTurns(teamsList3);
-        System.out.println("3: " + turns3);
-        turns.addAll(turns3);
+        Turns turns = getCombinationForTeam(teams);
 
         return turns;
-    }
-
-    private Teams shift(Teams teams, int shift) {
-        if (teams.size() == 0) {
-            return teams;
-        }
-
-        Team team;
-        for (int i = 0; i < shift; i++) {
-            team = teams.remove(teams.size() - 1);
-            teams.add(0, team);
-        }
-
-        return teams;
-    }
-
-    private Teams swap(Teams teams, int swap) {
-        if (teams.size() == 0) {
-            return teams;
-        }
-
-        for (int i = swap; i < teams.size(); i += swap) {
-            int firstIndex = i - swap;
-            Team first = teams.toArray()[firstIndex];
-
-            int secondIndex = firstIndex + swap;
-            Team second = teams.toArray()[secondIndex];
-
-            teams.remove(firstIndex);
-            teams.add(firstIndex, second);
-
-            teams.remove(secondIndex);
-            teams.add(secondIndex, first);
-        }
-
-        return teams;
     }
 
     private Turns getTurns(Teams teamsList) {
@@ -78,6 +29,33 @@ public class ChampionshipCalendar {
         }
 
         turns.add(turn);
+        return turns;
+    }
+
+    private Turns getCombinationForTeam(Teams teams) {
+        Turns turns = new Turns();
+
+        Teams tt = new Teams();
+        tt.addAll(teams);
+
+        List<Match> matches = new LinkedList<>();
+
+        for (int i = 0; i < teams.size()-1; i++) {
+            Team first = teams.toArray()[i];
+            for (int j = 0; j < tt.size()-1; j++) {
+                Match match = new Match(first, tt.toArray()[j + 1]);
+                matches.add(match);
+            }
+            tt.remove(0);
+        }
+
+        for (int i = 0; i < matches.size()/2; i++) {
+            Turn turn = new Turn();
+            turn.add(matches.get(i));
+            turn.add(matches.get(matches.size()-1-i));
+            turns.add(turn);
+        }
+
         return turns;
     }
 
