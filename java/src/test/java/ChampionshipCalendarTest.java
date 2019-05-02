@@ -38,7 +38,6 @@ public class ChampionshipCalendarTest {
         expectedTurns.add(turn2);
         expectedTurns.add(turn3);
 
-
         ClassLoader classLoader = getClass().getClassLoader();
         TeamsFile teamsFile = new TeamsFile();
         Teams actualTeams = teamsFile.load(classLoader.getResource("teams.txt").getFile());
@@ -48,7 +47,6 @@ public class ChampionshipCalendarTest {
 
         assertTurnsEquals(expectedTurns, actualTurns, "Turns are different!");
     }
-
 
     /**
      * ### AT2: Having only TeamA and TeamB, there will be only a turn with 1 match
@@ -103,7 +101,17 @@ public class ChampionshipCalendarTest {
         assertThrows(CalendarException.class, () -> calendar.generate(), errorMessage);
     }
 
-    private static void assertTurnsEquals(Turns expectedTurns, Turns actualTurns, String message){
+    /**
+     * ### AT5: Having no input file, return an error
+     */
+    @Test
+    void AT5_HavingNoInputFileReturnAnError() {
+        TeamsFile teamsFile = new TeamsFile();
+        String errorMessage = "Provide a valid input file!";
+        assertThrows(TeamFileException.class, () -> teamsFile.load("non-existing-file.txt"), errorMessage);
+    }
+
+    private static void assertTurnsEquals(Turns expectedTurns, Turns actualTurns, String message) {
         assertEquals(expectedTurns, actualTurns, message);
     }
 }
