@@ -9,6 +9,9 @@ public class ChampionshipCalendar {
     }
 
     public Turns generate() {
+        if (teams.size() < 2){
+            throw new CalendarException("Provide at least 2 teams!");
+        }
         Turns turns = getCombinationForTeam(teams);
         return turns;
     }
