@@ -9,26 +9,7 @@ public class ChampionshipCalendar {
     }
 
     public Turns generate() {
-        Teams teamsList = new Teams();
-        teamsList.addAll(teams);
-
         Turns turns = getCombinationForTeam(teams);
-
-        return turns;
-    }
-
-    private Turns getTurns(Teams teamsList) {
-        Turns turns = new Turns();
-
-        Turn turn = new Turn();
-
-        Team[] a = teamsList.toArray();
-        for (int i = 0; i < a.length; i += 2) {
-            Match match = new Match(a[i], a[i + 1]);
-            turn.add(match);
-        }
-
-        turns.add(turn);
         return turns;
     }
 
