@@ -89,6 +89,20 @@ public class ChampionshipCalendarTest {
         assertThrows(CalendarException.class, () -> calendar.generate(), errorMessage);
     }
 
+    /**
+     * ### AT4: Having no teams, return an error
+     */
+    @Test
+    void AT4_HavinghNoTeamAReturnAnError() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        TeamsFile teamsFile = new TeamsFile();
+        Teams actualTeams = teamsFile.load(classLoader.getResource("no-teams.txt").getFile());
+
+        ChampionshipCalendar calendar = new ChampionshipCalendar(actualTeams);
+        String errorMessage = "Provide at least 2 teams!";
+        assertThrows(CalendarException.class, () -> calendar.generate(), errorMessage);
+    }
+
     private static void assertTurnsEquals(Turns expectedTurns, Turns actualTurns, String message){
         assertEquals(expectedTurns, actualTurns, message);
     }
