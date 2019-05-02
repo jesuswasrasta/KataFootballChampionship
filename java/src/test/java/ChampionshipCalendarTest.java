@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ChampionshipCalendarTest {
 
@@ -72,6 +73,20 @@ public class ChampionshipCalendarTest {
         Turns actualTurns = calendar.generate();
 
         assertTurnsEquals(expectedTurns, actualTurns, "Turns are different!");
+    }
+
+    /**
+     * ### AT3: Having only TeamA, return an error
+     */
+    @Test
+    void AT3_HavinghOnlyTeamARetrunAnError() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        TeamsFile teamsFile = new TeamsFile();
+        Teams actualTeams = teamsFile.load(classLoader.getResource("teams-A.txt").getFile());
+
+        ChampionshipCalendar calendar = new ChampionshipCalendar(actualTeams);
+        String errorMessage = "Provide at least 2 teams!";
+        assertThrows(CalendarException.class, () -> calendar.generate(), errorMessage);
     }
 
     private static void assertTurnsEquals(Turns expectedTurns, Turns actualTurns, String message){
