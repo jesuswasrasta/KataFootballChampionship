@@ -48,6 +48,32 @@ public class ChampionshipCalendarTest {
         assertTurnsEquals(expectedTurns, actualTurns, "Turns are different!");
     }
 
+
+    /**
+     * ### AT2: Having only TeamA and TeamB, there will be only a turn with 1 match
+     */
+    @Test
+    public void AT2_Having2TeamsShouldGenerate1TurnWith1Match() {
+        Team teamA = new Team("A");
+        Team teamB = new Team("B");
+
+        Match matchAB = new Match(teamA, teamB);
+        Turn turn1 = new Turn();
+        turn1.add(matchAB);
+
+        Turns expectedTurns = new Turns();
+        expectedTurns.add(turn1);
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        TeamsFile teamsFile = new TeamsFile();
+        Teams actualTeams = teamsFile.load(classLoader.getResource("teams-AB.txt").getFile());
+
+        ChampionshipCalendar calendar = new ChampionshipCalendar(actualTeams);
+        Turns actualTurns = calendar.generate();
+
+        assertTurnsEquals(expectedTurns, actualTurns, "Turns are different!");
+    }
+
     private static void assertTurnsEquals(Turns expectedTurns, Turns actualTurns, String message){
         assertEquals(expectedTurns, actualTurns, message);
     }
