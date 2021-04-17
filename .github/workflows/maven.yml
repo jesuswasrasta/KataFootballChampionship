@@ -23,7 +23,5 @@ jobs:
         distribution: 'adopt'
     - name: KataFootballChampionship -> Maven clean install
       run: mvn -f java/ clean install 
-    - name: KataFootballChampionship -> Maven build
-      run: mvn -f java/ clean build
     - name: KataFootballChampionship -> Maven test
       run: mvn -f java/ clean test
