@@ -21,8 +21,8 @@ jobs:
         dotnet-version: 3.1.x
 
     - name: KataFootballChampionship -> Restore dependencies
-      run: dotnet restore KataFootballChampionship/KataFootballChampionship.sln
+      run: dotnet restore csharp/KataFootballChampionship.sln
     - name: KataFootballChampionship -> Build
-      run: dotnet build KataFootballChampionship/KataFootballChampionship.sln --no-restore
+      run: dotnet build csharp/KataFootballChampionship.sln --no-restore
     - name: KataFootballChampionship -> Test
-      run: dotnet test KataFootballChampionship/KataFootballChampionship.sln --no-build --verbosity normal
+      run: dotnet test csharp//KataFootballChampionship.sln --no-build --verbosity normal
