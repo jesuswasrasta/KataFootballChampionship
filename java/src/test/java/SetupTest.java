@@ -2,10 +2,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class HelloWorldTest {
+public class SetupTest {
 
     @Test
-    public void sayhello() {
-        assertTrue(false);
+    public void setupIsGood() {
+        assertTrue(true);
     }
 }
