@@ -4,6 +4,43 @@ KataFootballChampionship
 The purpose of this kata is to _develop software incrementally_, adding small features time by time.  
 This is even a kata for teams: going forward, feature can be developed indipendently by more than one person, letting them make experiments with versioning pattern like branching, merges and so on.  
 
+## Tips, hints, and recommendations
+Be sure to take a look before starting.  
+
+### Git and commit guidelines
+A minor change to your commit message style can make you a better programmer.  
+[Use conventional commits](https://www.conventionalcommits.org/).  
+
+Format: `<type>(<scope>): <subject>`  
+
+`<scope>` is optional.  
+
+Example
+~~~
+feat: add hat wobble
+^--^  ^------------^
+|     |
+|     +-> Summary in present tense.
+|
++-------> Type: chore, docs, feat, fix, refactor, style, or test.
+~~~
+
+More examples:  
+
+- `feat`: new feature for the user
+- `fix`: bug fix for the user
+- `docs`: changes to the documentation; no production code change
+- `style`: formatting, missing semi colons, etc; no production code change
+- `refactor`: refactoring production code, eg. renaming a variable
+- `test`: adding missing tests, refactoring tests; no production code change
+- `chore`: code cleanup, scripts, etc; no production code change
+
+#### References:
+- [Semantic commit messages](https://seesparkbox.com/foundry/semantic_commit_messages)
+- [Karma guidelins for commit messages](http://karma-runner.github.io/1.0/dev/git-commit-msg.html)
+- [Git aliases for conventional commits](https://github.com/fteem/git-semantic-commits)
+
+## The kata
 The goal of the software is to let the user generating football championship's calendar, following the rules the user can indicate.  
 For example:
 
