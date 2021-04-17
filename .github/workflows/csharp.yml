@@ -1,0 +1,28 @@
+name: C#
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+
+    - name: KataFootballChampionship -> Restore dependencies
+      run: dotnet restore KataFootballChampionship/KataFootballChampionship.sln
+    - name: KataFootballChampionship -> Build
+      run: dotnet build KataFootballChampionship/KataFootballChampionship.sln --no-restore
+    - name: KataFootballChampionship -> Test
+      run: dotnet test KataFootballChampionship/KataFootballChampionship.sln --no-build --verbosity normal
