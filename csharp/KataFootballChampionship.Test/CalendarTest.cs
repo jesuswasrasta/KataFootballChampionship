@@ -29,10 +29,10 @@ namespace KataFootballChampionship.Test
             ChampionshipCalendar calendar = new ChampionshipCalendar();
             var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT1-teams.txt");
             calendar.LoadTeams(path);
-            List<Match> turns = calendar.CalculateTurns();
+            List<Turn> turns = calendar.CalculateTurns();
             
-            Assert.AreEqual(0, turns.Count);
-            AssertMatches(turns);
+            Assert.AreEqual(6, turns.Count);
+            //AssertMatches(turns);
             
             //Team A - Team B
             //Team C - Team D
@@ -65,8 +65,8 @@ namespace KataFootballChampionship.Test
             Assert.AreEqual(12, matchs.Count);
             AssertMatches(matchs);
 
-            //Team A - Team B
-            //Team C - Team D
+            Assert.That(matchs.Contains(new Match("Team A", "Team B")));
+            
 
             //Team A - Team C
             //Team B - Team D
@@ -103,7 +103,10 @@ namespace KataFootballChampionship.Test
         //My assertion utils
         private void AssertMatches(List<Match> turns)
         {
-            throw new System.NotImplementedException();
+            foreach (var element in turns)
+            {
+                Assert.AreNotEqual(element.t1, element.t2);
+            }
         }
     }
 }

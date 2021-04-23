@@ -4,8 +4,8 @@ namespace KataFootballChampionship.Core
 {
     public class Match
     {
-        private readonly string t1;
-        private readonly string t2;
+        public readonly string t1;
+        public readonly string t2;
 
         public Match(string t1, string t2)
         {            

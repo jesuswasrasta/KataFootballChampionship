@@ -15,21 +15,20 @@ namespace KataFootballChampionship.Core
             _teamsList = new List<string>(teamsArray);
         }
 
-        public List<Match> CalculateTurns()
+        public List<Turn> CalculateTurns()
         {
-            List<Match> turns = new List<Match>();
+            List<Turn> turns = new List<Turn>();
 
-            IEnumerable<IEnumerable<string>> result = GetPermutations(_teamsList, 2);
 
-            List<Match> matches = new List<Match>();
-            foreach (var list in result)
+            List<Match> matches = CalculateMatchs();
+                            
+            for (int i = 0; i < matches.Count; i++)
             {
-                Match match = new Match(list.First(), list.Last());
-                
-                matches.Add(match);
-
+                Turn turn=new Turn();
+                turn.matches.Add(matches[i]);
+                turn.matches.Add(matches[++i]);
+                turns.Add(turn);
             }
-            
 
             //TODO: creare i Turn con i Match
 
