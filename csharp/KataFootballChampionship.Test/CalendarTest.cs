@@ -33,6 +33,15 @@ namespace KataFootballChampionship.Test
             
             Assert.Equals(3, turns.Count);
             AssertMatches(turns);
+            
+            //Team A - Team B
+            //Team C - Team D
+
+            //Team A - Team C
+            //Team B - Team D
+
+            //Team A - Team D
+            //Team B - Team C
         }
 
         
