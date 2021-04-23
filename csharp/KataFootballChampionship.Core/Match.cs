@@ -1,4 +1,6 @@
-﻿namespace KataFootballChampionship.Core
+﻿using System;
+
+namespace KataFootballChampionship.Core
 {
     public class Match
     {
@@ -11,14 +13,16 @@
             this.t2 = t2;
         }
 
-        public string GetT1()
+        public override bool Equals(object obj)
         {
-            return this.t1;
+            return obj is Match match &&
+                   t1 == match.t1 &&
+                   t2 == match.t2;
         }
 
-        public string GetT2()
+        public override int GetHashCode()
         {
-            return this.t2;
+            return HashCode.Combine(t1, t2);
         }
     }
 }

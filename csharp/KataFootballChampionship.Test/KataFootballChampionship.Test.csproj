@@ -17,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="S1-AT1-teams.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="S1-AT2-teams.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
