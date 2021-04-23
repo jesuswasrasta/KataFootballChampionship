@@ -79,7 +79,10 @@ namespace KataFootballChampionship.Test
         //My assertion utils
         private void AssertMatches(List<Match> turns)
         {
-            throw new System.NotImplementedException();
+            foreach (var element in turns)
+            {
+                Assert.AreNotEqual(element.t1, element.t2);
+            }
         }
     }
 }
