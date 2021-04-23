@@ -24,5 +24,17 @@ namespace KataFootballChampionship.Core
         {
             return HashCode.Combine(t1, t2);
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Match match &&
+                   t1 == match.t1 &&
+                   t2 == match.t2;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(t1, t2);
+        }
     }
 }
