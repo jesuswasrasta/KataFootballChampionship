@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using KataFootballChampionship.Core;
 using NUnit.Framework;
 
@@ -26,7 +27,8 @@ namespace KataFootballChampionship.Test
               
              */
             ChampionshipCalendar calendar = new ChampionshipCalendar();
-            calendar.LoadTeams("teams.txt");
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT1-teams.txt");
+            calendar.LoadTeams(path);
             List<Turn> turns = calendar.CalculateTurns();
             
             Assert.Equals(3, turns.Count);
