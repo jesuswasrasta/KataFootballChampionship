@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace KataFootballChampionship.Core
             _teamsList = new List<string>(teamsArray);
         }
 
-        public List<Turn> CalculateTurns()
+        public List<Match> CalculateTurns()
         {
-            List<Turn> turns = new List<Turn>();
+            List<Match> turns = new List<Match>();
 
             IEnumerable<IEnumerable<string>> result = GetPermutations(_teamsList, 2);
 
@@ -29,6 +30,7 @@ namespace KataFootballChampionship.Core
 
             }
             
+
             //TODO: creare i Turn con i Match
 
             return turns;
@@ -43,13 +45,20 @@ namespace KataFootballChampionship.Core
                 .SelectMany(t => list.Where(e => !t.Contains(e)),
                     (t1, t2) => t1.Concat(new T[] { t2 }));
         }
-    }
 
-    public class Match
-    {
-        public Match(object first, object last)
+        public List<Match> CalculateMatchs()
         {
-            throw new System.NotImplementedException();
+            IEnumerable<IEnumerable<string>> result = GetPermutations(_teamsList, 2);
+
+            List<Match> matches = new List<Match>();
+            foreach (var list in result)
+            {
+                Match match = new Match(list.First(), list.Last());
+
+                matches.Add(match);
+
+            }
+            return matches;
         }
     }
 }

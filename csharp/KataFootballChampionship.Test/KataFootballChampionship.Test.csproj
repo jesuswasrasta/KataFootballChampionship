@@ -16,4 +16,10 @@
     <ProjectReference Include="..\KataFootballChampionship.Core\KataFootballChampionship.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="S1-AT1-teams.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
