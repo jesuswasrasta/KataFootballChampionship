@@ -29,10 +29,10 @@ namespace KataFootballChampionship.Test
             ChampionshipCalendar calendar = new ChampionshipCalendar();
             var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT1-teams.txt");
             calendar.LoadTeams(path);
-            List<Match> turns = calendar.CalculateTurns();
+            List<Turn> turns = calendar.CalculateTurns();
             
-            Assert.Equals(3, turns.Count);
-            AssertMatches(turns);
+            Assert.AreEqual(6, turns.Count);
+            //AssertMatches(turns);
             
             //Team A - Team B
             //Team C - Team D
