@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace KataFootballChampionship.Core
 {
     public class ChampionshipCalendar
@@ -7,7 +9,7 @@ namespace KataFootballChampionship.Core
             throw new System.NotImplementedException();
         }
 
-        public Turns CalculateTurns()
+        public List<Turn> CalculateTurns()
         {
             throw new System.NotImplementedException();
         }

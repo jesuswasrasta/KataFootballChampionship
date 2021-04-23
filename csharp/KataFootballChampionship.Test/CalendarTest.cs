@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using KataFootballChampionship.Core;
 using NUnit.Framework;
 
@@ -26,16 +27,16 @@ namespace KataFootballChampionship.Test
              */
             ChampionshipCalendar calendar = new ChampionshipCalendar();
             calendar.LoadTeams("teams.txt");
-            Turns turns = calendar.CalculateTurns();
+            List<Turn> turns = calendar.CalculateTurns();
             
-            Assert.Equals(3, turns.Count());
+            Assert.Equals(3, turns.Count);
             AssertMatches(turns);
         }
 
         
         
         //My assertion utils
-        private void AssertMatches(Turns turns)
+        private void AssertMatches(List<Turn> turns)
         {
             throw new System.NotImplementedException();
         }
