@@ -19,16 +19,21 @@ namespace KataFootballChampionship.Core
         {
             List<Turn> turns = new List<Turn>();
 
-
             List<Match> matches = CalculateMatchs();
-                            
-            for (int i = 0; i < matches.Count; i++)
+
+            do
             {
-                Turn turn=new Turn();
-                turn.matches.Add(matches[i]);
-                turn.matches.Add(matches[++i]);
-                turns.Add(turn);
+                Turn turn = new Turn();
+                foreach (var match in matches)
+                {
+                    if(turn.containsTeam(match.t1) && turn.containsTeam(match.t2))
+                    { 
+                        turn.matches.Add(match);
+                        matches.Remove(match);
+                    }
+                }
             }
+            while (matches.Count != 0);
 
             //TODO: creare i Turn con i Match
 

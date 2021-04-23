@@ -32,7 +32,7 @@ namespace KataFootballChampionship.Test
             List<Turn> turns = calendar.CalculateTurns();
             
             Assert.AreEqual(6, turns.Count);
-            //AssertMatches(turns);
+            AssertTurns(turns);
             
             //Team A - Team B
             //Team C - Team D
@@ -43,6 +43,21 @@ namespace KataFootballChampionship.Test
             //Team A - Team D
             //Team B - Team C
         }
+
+        private void AssertTurns(List<Turn> turns)
+        {
+            Turn turn1 = new Turn();
+            turn1.matches.Add(new Match("Team A", "Team B"));
+            turn1.matches.Add(new Match("Team C", "Team D"));
+            Assert.That(turns.Contains(turn1));
+
+            Turn turn2 = new Turn();
+            turn2.matches.Add(new Match("Team A", "Team C"));
+            turn2.matches.Add(new Match("Team B", "Team D"));
+
+            Assert.That(turns.Contains(turn2));
+        }
+
         [Test]
         public void Generazione_match()
         {
