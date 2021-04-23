@@ -10,6 +10,7 @@ namespace KataFootballChampionship.Core
         NoValidInputFile,
         NotEnoghTeams
     }
+    
     public class ChampionshipCalendar
     {
         private List<string> _teamsList = new List<string>();

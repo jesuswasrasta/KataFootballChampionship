@@ -213,5 +213,19 @@ namespace KataFootballChampionship.Test
             Assert.AreEqual(6, turns.Count());
             AssertTurns(turns, new DateTime(2021, 04, 30));
         }
+        
+        private void AssertTurns(List<Turn> turns)
+        {
+            Turn turn1 = new Turn();
+            turn1.matches.Add(new Match("Team A", "Team B"));
+            turn1.matches.Add(new Match("Team C", "Team D"));
+            Assert.That(turns.Contains(turn1));
+
+            Turn turn2 = new Turn();
+            turn2.matches.Add(new Match("Team A", "Team C"));
+            turn2.matches.Add(new Match("Team B", "Team D"));
+
+            Assert.That(turns.Contains(turn2));
+        }
     }
 }

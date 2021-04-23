@@ -7,6 +7,7 @@ namespace KataFootballChampionship.Core
     {
         private List<Match> matches;
         private DateTime startDate;
+        
         public Turn()
         {
             matches = new List<Match>();
@@ -22,6 +23,7 @@ namespace KataFootballChampionship.Core
         {
             return matches.Contains(match);
         }
+        
         internal bool containsTeams(Match match)
         {
             return containsTeam(match.t1) || containsTeam(match.t2);            
@@ -63,6 +65,7 @@ namespace KataFootballChampionship.Core
         {
             return HashCode.Combine(matches);
         }
+        
         public override string ToString()
         {
             string turn="";
