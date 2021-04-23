@@ -10,5 +10,15 @@
             this.t1 = t1;
             this.t2 = t2;
         }
+
+        public string GetT1()
+        {
+            return this.t1;
+        }
+
+        public string GetT2()
+        {
+            return this.t2;
+        }
     }
 }

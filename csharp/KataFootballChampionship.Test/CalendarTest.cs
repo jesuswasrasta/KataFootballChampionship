@@ -75,6 +75,32 @@ namespace KataFootballChampionship.Test
             //Team B - Team C
         }
 
+        [Test]
+        public void AT2()
+        {
+            /* ## :Having only TeamA and TeamB, there will be only a turn with 1 match
+              
+             */
+            ChampionshipCalendar calendar = new ChampionshipCalendar();
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT2-teams.txt");
+            calendar.LoadTeams(path);
+            List<Match> matchs = calendar.CalculateMatchs();
+
+            Assert.AreEqual(2, matchs.Count);
+            //AssertMatches(matchs);
+            Assert.AreEqual("Team A", matchs[0].GetT1());
+            Assert.AreEqual("Team B", matchs[0].GetT2());
+
+            //Team A - Team B
+            //Team C - Team D
+
+            //Team A - Team C
+            //Team B - Team D
+
+            //Team A - Team D
+            //Team B - Team C
+        }
+
 
         //My assertion utils
         private void AssertMatches(List<Match> turns)
