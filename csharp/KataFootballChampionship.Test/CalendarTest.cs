@@ -65,6 +65,8 @@ namespace KataFootballChampionship.Test
             Assert.AreEqual(12, matchs.Count);
             AssertMatches(matchs);
 
+            Assert.That(matchs.Contains(new Match("Team A", "Team B")));
+            
             //Team A - Team B
             //Team C - Team D
 
