@@ -5,10 +5,6 @@ namespace KataFootballChampionship.Core
 {
     public class Turn
     {
-        //membro pubblico
-        // vìolo incapsulamento
-        // vìolo Legge di Demetra
-        // possibile soluzione: "Tell, don't ask"
         private List<Match> matches;
         
         public Turn()

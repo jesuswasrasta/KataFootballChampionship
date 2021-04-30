@@ -14,7 +14,17 @@ namespace KataFootballChampionship.Core
     {
         private List<string> _teamsList = new List<string>();
         private string _outputResult;
-
+        public void LoadTeams(string teamsTxt)
+        {
+            try
+            {
+                var teamsArray = File.ReadAllLines(teamsTxt);
+                _teamsList = new List<string>(teamsArray);
+            }
+            catch
+            {
+            }
+        }
         private bool AreTeamsValid()
         {
             if(GetTeamsCount() == (int)EErrorType.NoValidInputFile)
@@ -31,18 +41,16 @@ namespace KataFootballChampionship.Core
 
             return true;
         }
-
-        public void LoadTeams(string teamsTxt)
+        public string Print()
         {
-            try
-            {
-                var teamsArray = File.ReadAllLines(teamsTxt);
-                _teamsList = new List<string>(teamsArray);
-            }
-            catch
-            {
-            }
+            return _outputResult;
         }
+
+        public int GetTeamsCount()
+        {
+            return _teamsList.Count();
+        }
+        
 
         public TurnsList CalculateTurns()
         {
@@ -52,7 +60,6 @@ namespace KataFootballChampionship.Core
             List<Match> matchesRemove = new List<Match>();
             do
             {
-
                 Turn turn = new Turn();
                 foreach (var match in matches)
                 {
@@ -65,19 +72,10 @@ namespace KataFootballChampionship.Core
                 turns.AddTurn(turn);
             }
             while (matches.Count != matchesRemove.Count);
-
            
             return turns;
         }
-        
-        static IEnumerable<IEnumerable<T>> GetPermutations<T>(IEnumerable<T> list, int length)
-        {
-            if (length == 1) return list.Select(t => new T[] { t });
-
-            return GetPermutations(list, length - 1)
-                .SelectMany(t => list.Where(e => !t.Contains(e)),
-                    (t1, t2) => t1.Concat(new T[] { t2 }));
-        }
+                
 
         public List<Match> CalculateMatchs()
         {
@@ -96,15 +94,14 @@ namespace KataFootballChampionship.Core
             
             return matches;
         }
-
-        public string Print()
+        static IEnumerable<IEnumerable<T>> GetPermutations<T>(IEnumerable<T> list, int length)
         {
-            return _outputResult;
+            if (length == 1) return list.Select(t => new T[] { t });
+
+            return GetPermutations(list, length - 1)
+                .SelectMany(t => list.Where(e => !t.Contains(e)),
+                    (t1, t2) => t1.Concat(new T[] { t2 }));
         }
 
-        public int GetTeamsCount()
-        {
-            return _teamsList.Count();
-        }
     }
 }
