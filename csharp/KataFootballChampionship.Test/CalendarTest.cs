@@ -13,50 +13,8 @@ namespace KataFootballChampionship.Test
         }
 
         [Test]
-        public void Having_TeamA_TeamB_TeamC_and_TeamD_teams_there_will_be_3_turns_with_2_matches_each()
+        public void AT1_Having_TeamA_TeamB_TeamC_and_TeamD_teams_there_will_be_3_turns_with_2_matches_each()
         {
-            /* ## Scenario 1: Basic calendar generation
-               Given a list of teams,
-               as a ChampionshipManager
-               I want to generate a list of matches
-                
-               ### AT1: Having TeamA, TeamB, TeamC and TeamD teams, there will be 3 turns with 2 matches each
-                * Load the list of team from a text file, one team per row.
-                * generate turns with matches (only one match between each teams)
-                * print turns and matches to the video (console)
-              
-             */
-            ChampionshipCalendar calendar = new ChampionshipCalendar();
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT1-teams.txt");
-            calendar.LoadTeams(path);
-            List<Turn> turns = calendar.CalculateTurns();
-            
-            Assert.AreEqual(6, turns.Count);
-            //AssertMatches(turns);
-            
-            //Team A - Team B
-            //Team C - Team D
-
-            //Team A - Team C
-            //Team B - Team D
-
-            //Team A - Team D
-            //Team B - Team C
-        }
-        [Test]
-        public void Generazione_match()
-        {
-            /* ## Scenario 1: Basic calendar generation
-               Given a list of teams,
-               as a ChampionshipManager
-               I want to generate a list of matches
-                
-               ### AT1: Having TeamA, TeamB, TeamC and TeamD teams, there will be 3 turns with 2 matches each
-                * Load the list of team from a text file, one team per row.
-                * generate turns with matches (only one match between each teams)
-                * print turns and matches to the video (console)
-              
-             */
             ChampionshipCalendar calendar = new ChampionshipCalendar();
             var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT1-teams.txt");
             calendar.LoadTeams(path);
@@ -66,41 +24,19 @@ namespace KataFootballChampionship.Test
             AssertMatches(matchs);
 
             Assert.That(matchs.Contains(new Match("Team A", "Team B")));
-            
-
-            //Team A - Team C
-            //Team B - Team D
-
-            //Team A - Team D
-            //Team B - Team C
         }
 
         [Test]
-        public void AT2()
+        public void AT2_Having_only_TeamA_and_TeamB_there_will_be_only_a_turn_with_1_match()
         {
-            /* ## :Having only TeamA and TeamB, there will be only a turn with 1 match
-              
-             */
             ChampionshipCalendar calendar = new ChampionshipCalendar();
             var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT2-teams.txt");
             calendar.LoadTeams(path);
             List<Match> matches = calendar.CalculateMatchs();
 
             Assert.AreEqual(2, matches.Count);
-            //AssertMatches(matchs);
             Assert.That(matches.Contains(new Match("Team A", "Team B")));
-            //Team A - Team B
-            //Team C - Team D
-
-            //Team A - Team C
-            //Team B - Team D
-
-            //Team A - Team D
-            //Team B - Team C
         }
-
-
-        //My assertion utils
         private void AssertMatches(List<Match> turns)
         {
             foreach (var element in turns)
