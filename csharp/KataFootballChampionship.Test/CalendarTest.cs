@@ -45,11 +45,25 @@ namespace KataFootballChampionship.Test
             _calendar.LoadTeams(path);
             List<Match> matches = _calendar.CalculateMatchs();
 
-            var matchResult = _calendar.Print();
-            var numberOfTeams = _calendar.GetTeamsCount();
+            string matchResult = _calendar.Print();
+            int numberOfTeams = _calendar.GetTeamsCount();
 
             Assert.AreEqual(numberOfTeams, 1);
             Assert.AreEqual(matchResult, "Provide at least 2 teams!");
+        }
+
+        [Test]
+        public void AT5_Having_no_input_file_return_an_error()
+        {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "sò_lillo.txt");
+            _calendar.LoadTeams(path);
+            List<Match> matches = _calendar.CalculateMatchs();
+
+            string matchResult = _calendar.Print();
+            int numberOfTeams = _calendar.GetTeamsCount();
+
+            Assert.AreEqual(numberOfTeams, 0);
+            Assert.AreEqual(matchResult, "Provide a valid input file!");
         }
 
         private void AssertMatches(List<Match> turns)

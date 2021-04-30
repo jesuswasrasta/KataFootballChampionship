@@ -7,13 +7,21 @@ namespace KataFootballChampionship.Core
 {
     public class ChampionshipCalendar
     {
-        private List<string> _teamsList;
+        private List<string> _teamsList = new List<string>();
         private string _outputResult;
 
         public void LoadTeams(string teamsTxt)
         {
-            var teamsArray = File.ReadAllLines(teamsTxt);
-            _teamsList = new List<string>(teamsArray);
+            try
+            {
+                var teamsArray = File.ReadAllLines(teamsTxt);
+                _teamsList = new List<string>(teamsArray);
+            }
+            catch
+            {
+                _outputResult = "Provide a valid input file!";
+            }
+
         }
 
         public List<Turn> CalculateTurns()
@@ -49,7 +57,9 @@ namespace KataFootballChampionship.Core
             List<Match> matches = new List<Match>();
             const int minimumNumberOfTeams = 2;
 
-            if (GetTeamsCount() >= minimumNumberOfTeams)
+            if (GetTeamsCount() == 0)
+                return matches;
+            else if (GetTeamsCount() >= minimumNumberOfTeams)
             {
                 IEnumerable<IEnumerable<string>> result = GetPermutations(_teamsList, 2);
 
