@@ -39,8 +39,9 @@ namespace KataFootballChampionship.Core
                 var teamsArray = File.ReadAllLines(teamsTxt);
                 _teamsList = new List<string>(teamsArray);
             }
-            catch
+            catch(Exception e)
             {
+                _outputResult = e.Message;
             }
         }
 
