@@ -29,11 +29,11 @@ namespace KataFootballChampionship.Test
             ChampionshipCalendar calendar = new ChampionshipCalendar();
             var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT1-teams.txt");
             calendar.LoadTeams(path);
-            List<Turn> turns = calendar.CalculateTurns();
+            TurnsList turns = calendar.CalculateTurns();
             
-            Assert.AreEqual(6, turns.Count);
+            Assert.AreEqual(6, turns.Count());
             AssertTurns(turns);
-            
+
             //Team A - Team B
             //Team C - Team D
 
@@ -44,18 +44,43 @@ namespace KataFootballChampionship.Test
             //Team B - Team C
         }
 
-        private void AssertTurns(List<Turn> turns)
+        private void AssertTurns(TurnsList turns)
         {
             Turn turn1 = new Turn();
-            turn1.matches.Add(new Match("Team A", "Team B"));
-            turn1.matches.Add(new Match("Team C", "Team D"));
-            Assert.That(turns.Contains(turn1));
+            turn1.AddMatch(new Match("Team A", "Team B"));
+            turn1.AddMatch(new Match("Team C", "Team D"));
 
+            Assert.That(turns.containsTurn(turn1));
+            
             Turn turn2 = new Turn();
-            turn2.matches.Add(new Match("Team A", "Team C"));
-            turn2.matches.Add(new Match("Team B", "Team D"));
+            turn2.AddMatch(new Match("Team A", "Team C"));
+            turn2.AddMatch(new Match("Team B", "Team D"));
 
-            Assert.That(turns.Contains(turn2));
+            Assert.That(turns.containsTurn(turn2));
+
+            Turn turn3 = new Turn();
+            turn3.AddMatch(new Match("Team A", "Team D"));
+            turn3.AddMatch(new Match("Team B", "Team C"));
+
+            Assert.That(turns.containsTurn(turn3));
+
+            Turn turn4 = new Turn();
+            turn4.AddMatch(new Match("Team B", "Team A"));
+            turn4.AddMatch(new Match("Team D", "Team C"));
+
+            Assert.That(turns.containsTurn(turn4));
+
+            Turn turn5 = new Turn();
+            turn5.AddMatch(new Match("Team C", "Team A"));
+            turn5.AddMatch(new Match("Team D", "Team B"));
+
+            Assert.That(turns.containsTurn(turn5));
+
+            Turn turn6 = new Turn();            
+            turn6.AddMatch(new Match("Team C", "Team B"));
+            turn6.AddMatch(new Match("Team D", "Team A"));
+
+            Assert.That(turns.containsTurn(turn6));
         }
 
         [Test]

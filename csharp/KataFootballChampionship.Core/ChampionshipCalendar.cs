@@ -15,28 +15,29 @@ namespace KataFootballChampionship.Core
             _teamsList = new List<string>(teamsArray);
         }
 
-        public List<Turn> CalculateTurns()
+        public TurnsList CalculateTurns()
         {
-            List<Turn> turns = new List<Turn>();
+            TurnsList turns = new TurnsList();
 
             List<Match> matches = CalculateMatchs();
-
+            List<Match> matchesRemove = new List<Match>();
             do
             {
+
                 Turn turn = new Turn();
                 foreach (var match in matches)
                 {
-                    if(turn.containsTeam(match.t1) && turn.containsTeam(match.t2))
-                    { 
-                        turn.matches.Add(match);
-                        matches.Remove(match);
+                    if (!turn.containsTeams(match) && !matchesRemove.Contains(match))              
+                    {
+                        turn.AddMatch(match);
+                        matchesRemove.Add(match);
                     }
                 }
+                turns.AddTurn(turn);
             }
-            while (matches.Count != 0);
+            while (matches.Count != matchesRemove.Count);
 
-            //TODO: creare i Turn con i Match
-
+           
             return turns;
         }
         

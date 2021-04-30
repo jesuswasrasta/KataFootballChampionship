@@ -24,5 +24,10 @@ namespace KataFootballChampionship.Core
         {
             return HashCode.Combine(t1, t2);
         }
+
+        public override string ToString()
+        {
+            return t1 + " VS " + t2;
+        }
     }
 }

@@ -9,22 +9,25 @@ namespace KataFootballChampionship.Core
         // vìolo incapsulamento
         // vìolo Legge di Demetra
         // possibile soluzione: "Tell, don't ask"
-        public List<Match> matches;
+        private List<Match> matches;
         
         public Turn()
         {
             matches = new List<Match>();
         }
-
-        public override bool Equals(object obj)
+        
+        public bool containsMatch(Match match)
         {
-            return obj is Turn turn &&
-                   EqualityComparer<List<Match>>.Default.Equals(matches, turn.matches);
+            return matches.Contains(match);
+        }
+        internal bool containsTeams(Match match)
+        {
+            return containsTeam(match.t1) || containsTeam(match.t2);            
         }
 
-        public override int GetHashCode()
+        public IEnumerable<Match> GetMatches()
         {
-            return HashCode.Combine(matches);
+            return matches;
         }
 
         internal bool containsTeam(string team)
@@ -35,6 +38,37 @@ namespace KataFootballChampionship.Core
                     return true;
             }
             return false;
+        }
+
+        public void AddMatch(Match match)
+        {
+            matches.Add(match);
+        }
+
+        protected bool Equals(Turn other)
+        {
+            return Equals(matches, other.matches);
+        }
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Turn)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(matches);
+        }
+        public override string ToString()
+        {
+            string turn="";
+            foreach (var match in matches)
+            {
+                turn = turn + match.ToString() + Environment.NewLine;
+            }
+            return turn;
         }
     }
 }
