@@ -16,17 +16,6 @@ namespace KataFootballChampionship.Core
         private string _outputResult;
         private DateTime StartingDate;
 
-        public void LoadTeams(string teamsTxt)
-        {
-            try
-            {
-                var teamsArray = File.ReadAllLines(teamsTxt);
-                _teamsList = new List<string>(teamsArray);
-            }
-            catch
-            {
-            }
-        }
         private bool AreTeamsValid()
         {
             if(GetTeamsCount() == (int)EErrorType.NoValidInputFile)
@@ -43,17 +32,20 @@ namespace KataFootballChampionship.Core
 
             return true;
         }
-        public string Print()
-        {
-            return _outputResult;
-        }
 
-        public int GetTeamsCount()
+        public void LoadTeams(string teamsTxt)
         {
-            return _teamsList.Count();
+            try
+            {
+                var teamsArray = File.ReadAllLines(teamsTxt);
+                _teamsList = new List<string>(teamsArray);
+            }
+            catch(Exception e)
+            {
+                _outputResult = e.Message;
+            }
         }
         
-
         public TurnsList CalculateTurns()
         {
             TurnsList turns = new TurnsList();
@@ -80,7 +72,15 @@ namespace KataFootballChampionship.Core
            
             return turns;
         }
-                
+        
+        static IEnumerable<IEnumerable<T>> GetPermutations<T>(IEnumerable<T> list, int length)
+        {
+            if (length == 1) return list.Select(t => new T[] { t });
+
+            return GetPermutations(list, length - 1)
+                .SelectMany(t => list.Where(e => !t.Contains(e)),
+                    (t1, t2) => t1.Concat(new T[] { t2 }));
+        }
 
         public List<Match> CalculateMatchs()
         {
@@ -99,13 +99,16 @@ namespace KataFootballChampionship.Core
             
             return matches;
         }
-        static IEnumerable<IEnumerable<T>> GetPermutations<T>(IEnumerable<T> list, int length)
-        {
-            if (length == 1) return list.Select(t => new T[] { t });
 
-            return GetPermutations(list, length - 1)
-                .SelectMany(t => list.Where(e => !t.Contains(e)),
-                    (t1, t2) => t1.Concat(new T[] { t2 }));
+        public string Print()
+        {
+            return _outputResult;
+        }
+        
+       
+        public int GetTeamsCount()
+        {
+            return _teamsList.Count();
         }
 
         public void SetStartingDate(DateTime startingDate)
