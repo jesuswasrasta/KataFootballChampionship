@@ -199,6 +199,19 @@ namespace KataFootballChampionship.Test
             turn6.AddMatch(new Match("Team D", "Team A"));
 
             Assert.That(turns.containsTurn(turn6));
-        }       
+        }  
+        
+        [Test]
+        public void AT1_Scenario2()
+        {            
+            ChampionshipCalendar calendar = new ChampionshipCalendar();
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT1-teams.txt");
+            calendar.LoadTeams(path);
+            calendar.SetStartingDate(new DateTime(2021,04,30));
+            TurnsList turns = calendar.CalculateTurns();
+
+            Assert.AreEqual(6, turns.Count());
+            AssertTurns(turns, new DateTime(2021, 04, 30));
+        }
     }
 }

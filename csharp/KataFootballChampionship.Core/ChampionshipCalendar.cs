@@ -14,6 +14,8 @@ namespace KataFootballChampionship.Core
     {
         private List<string> _teamsList = new List<string>();
         private string _outputResult;
+        private DateTime StartingDate;
+
         public void LoadTeams(string teamsTxt)
         {
             try
@@ -58,9 +60,11 @@ namespace KataFootballChampionship.Core
 
             List<Match> matches = CalculateMatchs();
             List<Match> matchesRemove = new List<Match>();
+
+            DateTime dateTurn = StartingDate;
             do
             {
-                Turn turn = new Turn();
+                Turn turn = new Turn(dateTurn);
                 foreach (var match in matches)
                 {
                     if (!turn.containsTeams(match) && !matchesRemove.Contains(match))              
@@ -70,6 +74,7 @@ namespace KataFootballChampionship.Core
                     }
                 }
                 turns.AddTurn(turn);
+                dateTurn = dateTurn.AddDays(7);
             }
             while (matches.Count != matchesRemove.Count);
            
@@ -103,5 +108,9 @@ namespace KataFootballChampionship.Core
                     (t1, t2) => t1.Concat(new T[] { t2 }));
         }
 
+        public void SetStartingDate(DateTime startingDate)
+        {
+            this.StartingDate = startingDate;
+        }
     }
 }
