@@ -6,10 +6,16 @@ namespace KataFootballChampionship.Core
     public class Turn
     {
         private List<Match> matches;
-        
+        private DateTime startDate;
         public Turn()
         {
             matches = new List<Match>();
+            this.startDate = new DateTime();
+        }
+        public Turn(DateTime startDate)
+        {
+            matches = new List<Match>();
+            this.startDate = startDate;
         }
         
         public bool containsMatch(Match match)
