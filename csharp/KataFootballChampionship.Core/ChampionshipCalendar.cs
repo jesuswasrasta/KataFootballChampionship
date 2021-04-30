@@ -8,6 +8,7 @@ namespace KataFootballChampionship.Core
     public class ChampionshipCalendar
     {
         private List<string> _teamsList;
+        private string _outputResult;
 
         public void LoadTeams(string teamsTxt)
         {
@@ -18,8 +19,6 @@ namespace KataFootballChampionship.Core
         public List<Turn> CalculateTurns()
         {
             List<Turn> turns = new List<Turn>();
-
-
             List<Match> matches = CalculateMatchs();
                             
             for (int i = 0; i < matches.Count; i++)
@@ -47,17 +46,33 @@ namespace KataFootballChampionship.Core
 
         public List<Match> CalculateMatchs()
         {
-            IEnumerable<IEnumerable<string>> result = GetPermutations(_teamsList, 2);
-
             List<Match> matches = new List<Match>();
-            foreach (var list in result)
+            const int minimumNumberOfTeams = 2;
+
+            if (GetTeamsCount() >= minimumNumberOfTeams)
             {
-                Match match = new Match(list.First(), list.Last());
+                IEnumerable<IEnumerable<string>> result = GetPermutations(_teamsList, 2);
 
-                matches.Add(match);
-
+                foreach (var list in result)
+                {
+                    Match match = new Match(list.First(), list.Last());
+                    matches.Add(match);
+                }
             }
+            else
+                _outputResult = "Provide at least 2 teams!";
+            
             return matches;
+        }
+
+        public string Print()
+        {
+            return _outputResult;
+        }
+
+        public int GetTeamsCount()
+        {
+            return _teamsList.Count();
         }
     }
 }
