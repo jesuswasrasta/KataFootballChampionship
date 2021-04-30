@@ -5,15 +5,43 @@ using System.Linq;
 
 namespace KataFootballChampionship.Core
 {
+    public enum EErrorType
+    {
+        NoValidInputFile,
+        NotEnoghTeams
+    }
     public class ChampionshipCalendar
     {
-        private List<string> _teamsList;
+        private List<string> _teamsList = new List<string>();
         private string _outputResult;
+
+        private bool AreTeamsValid()
+        {
+            if(GetTeamsCount() == (int)EErrorType.NoValidInputFile)
+            {
+                _outputResult = "Provide a valid input file!";
+                return false;
+            }
+
+            if (GetTeamsCount() == (int)EErrorType.NotEnoghTeams)
+            {
+                _outputResult = "Provide at least 2 teams!";
+                return false;
+            }
+
+            return true;
+        }
 
         public void LoadTeams(string teamsTxt)
         {
-            var teamsArray = File.ReadAllLines(teamsTxt);
-            _teamsList = new List<string>(teamsArray);
+            try
+            {
+                var teamsArray = File.ReadAllLines(teamsTxt);
+                _teamsList = new List<string>(teamsArray);
+            }
+            catch
+            {
+            }
         }
 
         public TurnsList CalculateTurns()
@@ -42,7 +70,6 @@ namespace KataFootballChampionship.Core
             return turns;
         }
         
-        
         static IEnumerable<IEnumerable<T>> GetPermutations<T>(IEnumerable<T> list, int length)
         {
             if (length == 1) return list.Select(t => new T[] { t });
@@ -55,9 +82,8 @@ namespace KataFootballChampionship.Core
         public List<Match> CalculateMatchs()
         {
             List<Match> matches = new List<Match>();
-            const int minimumNumberOfTeams = 2;
 
-            if (GetTeamsCount() >= minimumNumberOfTeams)
+            if (AreTeamsValid())
             {
                 IEnumerable<IEnumerable<string>> result = GetPermutations(_teamsList, 2);
 
@@ -66,9 +92,7 @@ namespace KataFootballChampionship.Core
                     Match match = new Match(list.First(), list.Last());
                     matches.Add(match);
                 }
-            }
-            else
-                _outputResult = "Provide at least 2 teams!";
+            }   
             
             return matches;
         }
