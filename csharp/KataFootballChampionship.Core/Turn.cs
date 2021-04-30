@@ -1,79 +1,95 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace KataFootballChampionship.Core
 {
-    public class Turn
+    public class Turn : IEquatable<Turn>
     {
-        private List<Match> matches;
+        private readonly HashSet<Match> _matches;
         private DateTime startDate;
-        
+
         public Turn()
         {
-            matches = new List<Match>();
+            _matches = new HashSet<Match>();
             this.startDate = new DateTime();
         }
+        
         public Turn(DateTime startDate)
         {
-            matches = new List<Match>();
             this.startDate = startDate;
+            _matches = new HashSet<Match>();
         }
         
+        public void AddMatch(Match match)
+        {
+            _matches.Add(match);
+        }
+
+       
         public bool containsMatch(Match match)
         {
-            return matches.Contains(match);
+            return _matches.Contains(match);
         }
         
-        internal bool containsTeams(Match match)
-        {
-            return containsTeam(match.t1) || containsTeam(match.t2);            
-        }
 
         public IEnumerable<Match> GetMatches()
         {
-            return matches;
+            return _matches;
         }
 
-        internal bool containsTeam(string team)
+        public bool ContainsTeam(Match match)
         {
-            foreach (var match in matches)
+            foreach (var m in _matches)
             {
-                if (match.t1 == team || match.t2 == team)
+                if (m.ContainsTeam(match.Team1) || m.ContainsTeam(match.Team2))
+                {
                     return true;
+                }
             }
+
             return false;
         }
 
-        public void AddMatch(Match match)
+        public bool Equals(Turn? other)
         {
-            matches.Add(match);
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return _matches.SetEquals(other._matches);
         }
 
-        protected bool Equals(Turn other)
-        {
-            return Equals(matches, other.matches);
-        }
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((Turn)obj);
+            return Equals((Turn) obj);
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(matches);
+            return (_matches != null ? _matches.GetHashCode() : 0);
+        }
+        
+        public static bool operator ==(Turn left, Turn right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(Turn left, Turn right)
+        {
+            return !Equals(left, right);
         }
         
         public override string ToString()
         {
-            string turn="";
-            foreach (var match in matches)
+            var stringBuilder = new StringBuilder();
+            foreach (var match in _matches)
             {
-                turn = turn + match.ToString() + Environment.NewLine;
+                stringBuilder.Append($"({match})");
             }
-            return turn;
+
+            return stringBuilder.ToString();
         }
     }
 }

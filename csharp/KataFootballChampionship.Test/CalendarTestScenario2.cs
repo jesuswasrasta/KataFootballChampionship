@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace KataFootballChampionship.Test
 {
-    public class CalendarTest
+    public class CalendarTestScenario2
     {
         ChampionshipCalendar _calendar;
 
@@ -70,69 +70,19 @@ namespace KataFootballChampionship.Test
             turn6.AddMatch(match12);
             AT1_Turns.Add(turn6); 
         }
-
-
+        
         [Test]
-        public void AT1_Having_TeamA_TeamB_TeamC_and_TeamD_teams_there_will_be_6_turns_with_2_matches_each()
-        {
+        public void AT1_Scenario2()
+        {            
             var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT1-teams.txt");
             _calendar.LoadTeams(path);
+            _calendar.SetStartingDate(new DateTime(2021,04,30));
+            
             var turns = _calendar.CalculateTurns();
-
             Assert.AreEqual(6, turns.Count);
             
-            foreach (Turn turn in AT1_Turns)
-            {
-                Assert.That(turns.Contains(turn), $"turns.Contains({turn})");    
-            }
+            Assert.Fail("Completare il test testando le date dei turni");
         }
         
-        
-        [Test]
-        public void AT2_Having_only_TeamA_and_TeamB_there_will_be_only_a_turn_with_1_match()
-        {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT2-teams.txt");
-            _calendar.LoadTeams(path);
-            var turns = _calendar.CalculateTurns();
-
-            Assert.AreEqual(2, turns.Count);
-            
-            var turn1 = new Turn();
-            turn1.AddMatch(new Match("Team A", "Team B"));
-
-            var turn2 = new Turn();
-            turn2.AddMatch(new Match("Team B", "Team A"));
-            
-            Assert.That(turns.Contains(turn1));
-            Assert.That(turns.Contains(turn2));
-        }
-
-        [Test]
-        public void AT3_Having_only_TeamA_return_an_error()
-        {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT3-teams.txt");
-            _calendar.LoadTeams(path);
-            var turns = _calendar.CalculateTurns();
-
-            string matchResult = _calendar.Print();
-            int numberOfTeams = _calendar.GetTeamsCount();
-
-            Assert.AreEqual(numberOfTeams, 1);
-            Assert.AreEqual(matchResult, "Provide at least 2 teams!");
-        }
-
-        [Test]
-        public void AT5_Having_no_input_file_return_an_error()
-        {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "sò_lillo.txt");
-            _calendar.LoadTeams(path);
-            var turns = _calendar.CalculateTurns();
-
-            string matchResult = _calendar.Print();
-            int numberOfTeams = _calendar.GetTeamsCount();
-
-            Assert.AreEqual(numberOfTeams, 0);
-            Assert.AreEqual(matchResult, "Provide a valid input file!");
-        }
     }
 }

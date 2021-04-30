@@ -13,6 +13,7 @@ namespace KataFootballChampionship.Core
     
     public class ChampionshipCalendar
     {
+        private TurnSet _turns;
         private List<string> _teamsList = new List<string>();
         private string _outputResult;
         private DateTime StartingDate;
@@ -46,32 +47,37 @@ namespace KataFootballChampionship.Core
                 _outputResult = e.Message;
             }
         }
-        
-        public TurnsList CalculateTurns()
+
+        public TurnSet CalculateTurns()
         {
-            TurnsList turns = new TurnsList();
-
-            List<Match> matches = CalculateMatchs();
-            List<Match> matchesRemove = new List<Match>();
-
+            var matches = CalculateMatches();
+            _turns = new TurnSet();
+            var list = new List<int>(Enumerable.Range(1, 10));
+            
             DateTime dateTurn = StartingDate;
-            do
+            for (var i = matches.Count-1; i >= 0; i--)
             {
+                var m1 = matches[i];
                 Turn turn = new Turn(dateTurn);
-                foreach (var match in matches)
+                turn.AddMatch(m1);
+                matches.Remove(m1);
+                // for (var j = 0; j < matches.Count; j++)
+                for (var j = matches.Count-1; j >= 0; j--)
                 {
-                    if (!turn.containsTeams(match) && !matchesRemove.Contains(match))              
+                    var m2 = matches[j];
+                    if (!turn.ContainsTeam(m2))
                     {
-                        turn.AddMatch(match);
-                        matchesRemove.Add(match);
+                        turn.AddMatch(m2);
+                        matches.Remove(m2);
+                        i--;
                     }
                 }
-                turns.AddTurn(turn);
+
                 dateTurn = dateTurn.AddDays(7);
+                _turns.Add(turn);
             }
-            while (matches.Count != matchesRemove.Count);
-           
-            return turns;
+
+            return _turns;
         }
         
         static IEnumerable<IEnumerable<T>> GetPermutations<T>(IEnumerable<T> list, int length)
@@ -82,22 +88,22 @@ namespace KataFootballChampionship.Core
                 .SelectMany(t => list.Where(e => !t.Contains(e)),
                     (t1, t2) => t1.Concat(new T[] { t2 }));
         }
-
-        public List<Match> CalculateMatchs()
+        
+        private List<Match> CalculateMatches()
         {
-            List<Match> matches = new List<Match>();
+            var permutationElementsSize = 2;
+            var result = GetPermutations(_teamsList, permutationElementsSize);
 
+            var matches = new List<Match>();
             if (AreTeamsValid())
             {
-                IEnumerable<IEnumerable<string>> result = GetPermutations(_teamsList, 2);
-
                 foreach (var list in result)
                 {
-                    Match match = new Match(list.First(), list.Last());
+                    var match = new Match(list.First(), list.Last());
                     matches.Add(match);
                 }
-            }   
-            
+            }
+
             return matches;
         }
 
@@ -105,8 +111,7 @@ namespace KataFootballChampionship.Core
         {
             return _outputResult;
         }
-        
-       
+
         public int GetTeamsCount()
         {
             return _teamsList.Count();
