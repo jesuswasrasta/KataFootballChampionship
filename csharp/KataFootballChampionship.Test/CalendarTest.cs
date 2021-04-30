@@ -36,10 +36,7 @@ namespace KataFootballChampionship.Test
 
             Assert.AreEqual(2, matches.Count);
             Assert.That(matches.Contains(new Match("Team A", "Team B")));
-        
 
-            //Team A - Team D
-            //Team B - Team C
         }
         [Test]
         public void AT3_Having_only_TeamA_return_an_error()
@@ -76,15 +73,6 @@ namespace KataFootballChampionship.Test
 
         Assert.AreEqual(6, turns.Count());
         AssertTurns(turns);
-
-        //Team A - Team B
-        //Team C - Team D
-
-        //Team A - Team C
-        //Team B - Team D
-
-        //Team A - Team D
-        //Team B - Team C
     }
 
     private void AssertTurns(TurnsList turns)
@@ -149,15 +137,6 @@ namespace KataFootballChampionship.Test
         AssertMatches(matchs);
 
         Assert.That(matchs.Contains(new Match("Team A", "Team B")));
-
-        //Team A - Team B
-        //Team C - Team D
-
-        //Team A - Team C
-        //Team B - Team D
-
-        //Team A - Team D
-        //Team B - Team C
     }
 
 
