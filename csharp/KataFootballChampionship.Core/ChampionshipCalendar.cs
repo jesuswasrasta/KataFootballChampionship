@@ -5,12 +5,18 @@ using System.Linq;
 
 namespace KataFootballChampionship.Core
 {
+    /* Temi da discutere insieme
+     * - CRC cards (Class-Responsibility-Collaboration cards, see: http://c2.com/doc/oopsla89/paper.html)
+     * - Port & Adapters (see: https://wiki.c2.com/?HexagonalArchitecture)
+     * - Domain vs Infrastructure ()
+     */
+
     public enum EErrorType
     {
         NoValidInputFile,
         NotEnoghTeams
     }
-    
+
     public class ChampionshipCalendar
     {
         private TurnSet _turns;
