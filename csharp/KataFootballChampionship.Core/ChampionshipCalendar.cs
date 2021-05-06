@@ -5,10 +5,29 @@ using System.Linq;
 
 namespace KataFootballChampionship.Core
 {
-    /* Temi da discutere insieme
-     * - CRC cards (Class-Responsibility-Collaboration cards, see: http://c2.com/doc/oopsla89/paper.html)
-     * - Port & Adapters (see: https://wiki.c2.com/?HexagonalArchitecture)
-     * - Domain vs Infrastructure ()
+    /* Cosa ho fatto
+     * - merge dei due rami feat1 e feat2
+     *   - ho portato le implementazioni della gestioen degli errori com'è, da discutere insieme
+     * - rivisto algoritmo di generazione turni e match
+     * - rivisto test AT1
+     * 
+     *
+     * Temi da discutere insieme
+     * - rivediamo insieme scelte implementative; discussione
+     *
+     * - discussione: come evitare "merge hell?"
+     *   - limiti del versionamento: serve una maggiore disciplina nella strutturazione del codice
+     *
+     * -spunti:
+     *  - CRC cards (Class-Responsibility-Collaboration cards, see: http://c2.com/doc/oopsla89/paper.html)
+     *  - Port & Adapters (see: https://wiki.c2.com/?HexagonalArchitecture)
+     *  - Domain vs Infrastructure ()
+     *
+     * TODO
+     * - rivediamo qualche implementazione
+     *   - separiamo file di test in piu file?
+     * - evidenziamo collaboratori, separiamo codice
+     * - sviluppiamo altre 2 feature in parallelo, vediamo se ci incartiamo ancora... :)
      */
 
     public enum EErrorType
