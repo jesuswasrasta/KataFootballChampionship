@@ -6,11 +6,12 @@ namespace KataFootballChampionship.Test
 {
     public class TeamsLoader : ITeamsLoader
     {
-        private readonly List<string> _teamsList;
+        private readonly List<string> _teamsList = new List<string>();
 
         public TeamsLoader(string path)
         {
-            _teamsList = new List<string>(File.ReadAllLines(path));
+            if(File.Exists(path))
+                _teamsList = new List<string>(File.ReadAllLines(path));
         }
 
         public List<string> GetTeams()
