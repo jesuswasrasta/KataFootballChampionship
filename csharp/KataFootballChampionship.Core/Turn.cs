@@ -26,18 +26,6 @@ namespace KataFootballChampionship.Core
             _matches.Add(match);
         }
 
-       
-        public bool containsMatch(Match match)
-        {
-            return _matches.Contains(match);
-        }
-        
-
-        public IEnumerable<Match> GetMatches()
-        {
-            return _matches;
-        }
-
         public bool ContainsTeam(Match match)
         {
             foreach (var m in _matches)
