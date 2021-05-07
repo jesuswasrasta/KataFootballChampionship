@@ -53,6 +53,7 @@ namespace KataFootballChampionship.Core
         public ChampionshipCalendar(ITeamsLoader teamsLoader)
         {
             _teamsLoader = teamsLoader;
+            _teamsList = teamsLoader.GetTeams();
         }
         
         private bool AreTeamsValid()
