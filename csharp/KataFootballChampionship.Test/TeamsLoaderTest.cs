@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using KataFootballChampionship.Core;
 using NUnit.Framework;
 
 namespace KataFootballChampionship.Test
@@ -12,9 +13,9 @@ namespace KataFootballChampionship.Test
             string path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT1-teams.txt");
             TeamsLoader teamsloader = new TeamsLoader(path);
             
-            List<string> teams = teamsloader.GetTeams();
+            TeamList teams = teamsloader.GetTeams();
 
-            Assert.AreEqual(4, teams.Count);
+            Assert.AreEqual(4, teams.GetCount());
         }
     }
 }

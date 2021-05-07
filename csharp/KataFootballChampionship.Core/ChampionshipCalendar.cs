@@ -41,11 +41,11 @@ namespace KataFootballChampionship.Core
         NoValidInputFile,
         NotEnoghTeams
     }
-
+    
     public class ChampionshipCalendar
     {
         private TurnSet _turns;
-        private List<string> _teamsList = new List<string>();
+        private TeamList _teamsList = new TeamList();
         private string _outputResult;
         private DateTime StartingDate;
 
@@ -135,7 +135,7 @@ namespace KataFootballChampionship.Core
 
         public int GetTeamsCount()
         {
-            return _teamsList.Count();
+            return _teamsList.GetCount();
         }
 
         public void SetStartingDate(DateTime startingDate)
