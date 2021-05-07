@@ -20,7 +20,7 @@ namespace KataFootballChampionship.Core
      * - rivediamo insieme scelte implementative; discussione
      * - facciamo passare AT4
      *
-     * - discussione: come evitare "merge hell?"
+     * - discussione: come evitare "merge hell"?
      *   - limiti del versionamento: serve una maggiore disciplina nella strutturazione del codice
      *
      * -spunti:
