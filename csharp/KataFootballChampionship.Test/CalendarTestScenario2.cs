@@ -13,20 +13,15 @@ namespace KataFootballChampionship.Test
         public CalendarTestScenario2()
         {
         }
-
-        [SetUp]
-        public void Setup()
-        {
-            _calendar = new ChampionshipCalendar();
-        }
+        
         
         [Test]
         public void AT1_Scenario2()
         {            
             var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT1-teams.txt");
             var startingDate = new DateTime(2021,04,30);
-            
-            _calendar.LoadTeams(path);
+
+            _calendar = new ChampionshipCalendar(new TeamsLoader(path));
             _calendar.SetStartingDate(startingDate);
 
             var at1Turns = GetAt1Turns(startingDate);

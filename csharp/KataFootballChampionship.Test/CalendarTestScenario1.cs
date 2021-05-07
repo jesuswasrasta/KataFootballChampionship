@@ -14,9 +14,7 @@ namespace KataFootballChampionship.Test
         
         [SetUp]
         public void Setup()
-        {
-            _calendar = new ChampionshipCalendar();
-
+        {            
             /*
              * (Team D - Team C)(Team B - Team A) |
              * (Team D - Team B)(Team C - Team A) |
@@ -75,8 +73,9 @@ namespace KataFootballChampionship.Test
         [Test]
         public void AT1_Having_TeamA_TeamB_TeamC_and_TeamD_teams_there_will_be_6_turns_with_2_matches_each()
         {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT1-teams.txt");
-            _calendar.LoadTeams(path);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT1-teams.txt");            
+            _calendar = new ChampionshipCalendar(new TeamsLoader(path));
+           
             var turns = _calendar.CalculateTurns();
 
             Assert.AreEqual(6, turns.Count);
@@ -92,7 +91,8 @@ namespace KataFootballChampionship.Test
         public void AT2_Having_only_TeamA_and_TeamB_there_will_be_only_a_turn_with_1_match()
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT2-teams.txt");
-            _calendar.LoadTeams(path);
+            _calendar = new ChampionshipCalendar(new TeamsLoader(path));
+
             var turns = _calendar.CalculateTurns();
 
             Assert.AreEqual(2, turns.Count);
@@ -111,7 +111,8 @@ namespace KataFootballChampionship.Test
         public void AT3_Having_only_TeamA_return_an_error()
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT3-teams.txt");
-            _calendar.LoadTeams(path);
+            _calendar = new ChampionshipCalendar(new TeamsLoader(path));
+
             var turns = _calendar.CalculateTurns();
 
             string matchResult = _calendar.Print();
@@ -125,7 +126,7 @@ namespace KataFootballChampionship.Test
         public void AT4_Having_no_teams_return_an_error()
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT4-teams.txt");
-            _calendar.LoadTeams(path);
+            _calendar = new ChampionshipCalendar(new TeamsLoader(path));
             var turns = _calendar.CalculateTurns();
 
             string matchResult = _calendar.Print();
@@ -139,7 +140,8 @@ namespace KataFootballChampionship.Test
         public void AT5_Having_no_input_file_return_an_error()
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "sò_lillo.txt");
-            _calendar.LoadTeams(path);
+            _calendar = new ChampionshipCalendar(new TeamsLoader(path));
+
             var turns = _calendar.CalculateTurns();
 
             string matchResult = _calendar.Print();

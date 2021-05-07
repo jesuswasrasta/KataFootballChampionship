@@ -12,8 +12,7 @@ namespace KataFootballChampionship.Test
             var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT1-teams.txt");
             var teamsLoader = new TeamsLoader(path);
             
-            var calendar = new ChampionshipCalendar(teamsLoader);
-            calendar.LoadTeams(path);
+            var calendar = new ChampionshipCalendar(teamsLoader);            
 
             var teamsCount = calendar.GetTeamsCount();
             Assert.AreEqual(4, teamsCount);

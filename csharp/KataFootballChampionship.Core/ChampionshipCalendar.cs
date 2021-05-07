@@ -50,11 +50,6 @@ namespace KataFootballChampionship.Core
         private string _outputResult;
         private DateTime StartingDate;
 
-        public ChampionshipCalendar()
-        {
-               
-        }
-
         public ChampionshipCalendar(ITeamsLoader teamsLoader)
         {
             _teamsLoader = teamsLoader;
@@ -75,23 +70,6 @@ namespace KataFootballChampionship.Core
             }
 
             return true;
-        }
-
-        public void LoadTeams(string teamsTxt)
-        {
-            try
-            {
-                if (_teamsLoader == null)
-                {
-                    _teamsLoader = new TeamsLoader(teamsTxt);    
-                }
-
-                _teamsList = _teamsLoader.GetTeams();
-            }
-            catch(Exception e)
-            {
-                _outputResult = e.Message;
-            }
         }
 
         public TurnSet CalculateTurns()
