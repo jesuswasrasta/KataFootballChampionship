@@ -6,14 +6,19 @@ using System.Linq;
 namespace KataFootballChampionship.Core
 {
     /* Cosa ho fatto
+     * 
      * - merge dei due rami feat1 e feat2
-     *   - ho portato le implementazioni della gestioen degli errori com'è, da discutere insieme
      * - rivisto algoritmo di generazione turni e match
      * - rivisto test AT1
      * 
+     * - ho portato le implementazioni della gestione degli errori com'è, da discutere insieme
+     *   - test AT4: non passa...
+     * 
      *
      * Temi da discutere insieme
+     * 
      * - rivediamo insieme scelte implementative; discussione
+     * - facciamo passare AT4
      *
      * - discussione: come evitare "merge hell?"
      *   - limiti del versionamento: serve una maggiore disciplina nella strutturazione del codice
