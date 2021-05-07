@@ -38,15 +38,17 @@ namespace KataFootballChampionship.Core
 
             return false;
         }
-
-        public bool Equals(Turn? other)
+        
+        public bool Equals(Turn other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
+            
+            //TODO: uguaglianza tiene conto anche della data --> return Equals(_matches, other._matches) && startDate.Equals(other.startDate);
             return _matches.SetEquals(other._matches);
         }
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
@@ -56,7 +58,8 @@ namespace KataFootballChampionship.Core
 
         public override int GetHashCode()
         {
-            return (_matches != null ? _matches.GetHashCode() : 0);
+            //TODO: hash tiene conto anche della data --> return HashCode.Combine(_matches, startDate);
+            return HashCode.Combine(_matches);
         }
         
         public static bool operator ==(Turn left, Turn right)
