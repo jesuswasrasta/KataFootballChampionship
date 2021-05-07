@@ -17,5 +17,10 @@ namespace KataFootballChampionship.Test
         {
             return 4;
         }
+
+        public List<string> GetTeams()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
