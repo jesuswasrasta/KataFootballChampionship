@@ -44,7 +44,6 @@ namespace KataFootballChampionship.Core
 
     public class ChampionshipCalendar
     {
-        private ITeamsLoader _teamsLoader;
         private TurnSet _turns;
         private List<string> _teamsList = new List<string>();
         private string _outputResult;
@@ -52,7 +51,6 @@ namespace KataFootballChampionship.Core
 
         public ChampionshipCalendar(ITeamsLoader teamsLoader)
         {
-            _teamsLoader = teamsLoader;
             _teamsList = teamsLoader.GetTeams();
         }
         
