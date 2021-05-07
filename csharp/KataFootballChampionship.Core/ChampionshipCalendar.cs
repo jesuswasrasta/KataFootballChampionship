@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using KataFootballChampionship.Test;
 
 namespace KataFootballChampionship.Core
 {
@@ -43,11 +44,22 @@ namespace KataFootballChampionship.Core
 
     public class ChampionshipCalendar
     {
+        private ITeamsLoader _teamsLoader;
         private TurnSet _turns;
         private List<string> _teamsList = new List<string>();
         private string _outputResult;
         private DateTime StartingDate;
 
+        public ChampionshipCalendar()
+        {
+               
+        }
+
+        public ChampionshipCalendar(ITeamsLoader teamsLoader)
+        {
+            _teamsLoader = teamsLoader;
+        }
+        
         private bool AreTeamsValid()
         {
             if(GetTeamsCount() == (int)EErrorType.NoValidInputFile)
@@ -69,8 +81,12 @@ namespace KataFootballChampionship.Core
         {
             try
             {
-                var teamsArray = File.ReadAllLines(teamsTxt);
-                _teamsList = new List<string>(teamsArray);
+                if (_teamsLoader == null)
+                {
+                    _teamsLoader = new TeamsLoader(teamsTxt);    
+                }
+
+                _teamsList = _teamsLoader.GetTeams();
             }
             catch(Exception e)
             {

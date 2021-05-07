@@ -9,7 +9,11 @@ namespace KataFootballChampionship.Test
     public class CalendarTestScenario2
     {
         ChampionshipCalendar _calendar;
-        
+
+        public CalendarTestScenario2()
+        {
+        }
+
         [SetUp]
         public void Setup()
         {

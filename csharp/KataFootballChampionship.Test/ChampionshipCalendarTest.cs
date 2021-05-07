@@ -13,9 +13,10 @@ namespace KataFootballChampionship.Test
             var teamsLoader = new TeamsLoader(path);
             
             var calendar = new ChampionshipCalendar(teamsLoader);
-            
+            calendar.LoadTeams(path);
+
             var teamsCount = calendar.GetTeamsCount();
-            Assert.Equals(4, teamsCount);
+            Assert.AreEqual(4, teamsCount);
         }
     }
 }
