@@ -94,9 +94,9 @@ Given a list of teams,
 Given a start date,  
 Given a day of the week,  
 as a ChampionshipManager  
-I want to generate a list of matches with relative dates  
+I want to generate a list of turns with relative dates  
 
-### AT1: Having TeamA, TeamB, TeamC and TeamD teams, StartDate equal to 04/09/2016, DayOfWeek equal to Sunday, there will be 3 matches
+### AT1: Having TeamA, TeamB, TeamC and TeamD teams, StartDate equal to 04/09/2016, DayOfWeek equal to Sunday, there will be 6 matches
 * Load the list of team from a text file, one team per row.
 * Ask user to input StartDate
 * Ask user to input DayOfWeek
