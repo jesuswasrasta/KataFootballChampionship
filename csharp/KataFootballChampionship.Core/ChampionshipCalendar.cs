@@ -82,7 +82,6 @@ namespace KataFootballChampionship.Core
         {
             var matches = CalculateMatches();
             _turns = new TurnSet();
-            var list = new List<int>(Enumerable.Range(1, 10));
             
             DateTime dateTurn = StartingDate;
             for (var i = matches.Count-1; i >= 0; i--)
