@@ -91,7 +91,6 @@ namespace KataFootballChampionship.Core
                 Turn turn = new Turn(dateTurn);
                 turn.AddMatch(m1);
                 matches.Remove(m1);
-                // for (var j = 0; j < matches.Count; j++)
                 for (var j = matches.Count-1; j >= 0; j--)
                 {
                     var m2 = matches[j];
