@@ -120,6 +120,20 @@ namespace KataFootballChampionship.Test
             Assert.AreEqual(numberOfTeams, 1);
             Assert.AreEqual(matchResult, "Provide at least 2 teams!");
         }
+        
+        [Test]
+        public void AT4_Having_no_teams_return_an_error()
+        {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "S1-AT4-teams.txt");
+            _calendar.LoadTeams(path);
+            var turns = _calendar.CalculateTurns();
+
+            string matchResult = _calendar.Print();
+            int numberOfTeams = _calendar.GetTeamsCount();
+
+            Assert.AreEqual(numberOfTeams, 0);
+            Assert.AreEqual(matchResult, "Provide at least 2 teams!");
+        }
 
         [Test]
         public void AT5_Having_no_input_file_return_an_error()
