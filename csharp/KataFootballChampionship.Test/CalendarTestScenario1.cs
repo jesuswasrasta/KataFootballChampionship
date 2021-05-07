@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace KataFootballChampionship.Test
 {
-    public class CalendarTest
+    public class CalendarTestScenario1
     {
         ChampionshipCalendar _calendar;
 
