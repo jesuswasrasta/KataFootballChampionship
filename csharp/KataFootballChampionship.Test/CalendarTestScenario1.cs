@@ -83,7 +83,7 @@ namespace KataFootballChampionship.Test
             
             foreach (Turn turn in AT1_Turns)
             {
-                Assert.That(turns.Contains(turn), $"turns.Contains({turn})");    
+                Assert.That(turns.Contains(turn), $"turns.Contains({turn})", $"turno non presente: {turn}");    
             }
         }
         
