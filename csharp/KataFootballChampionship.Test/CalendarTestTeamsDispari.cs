@@ -20,7 +20,7 @@ namespace KataFootballChampionship.Test
             _calendar = new ChampionshipCalendar(new TeamsLoader(path));
         }
             [Test]
-        public void AT3_Having_odd_teams_one_team_on_bye()
+        public void AT3_Having_TeamA_TeamB_TeamC__there_will_be_Match_A_B_with_C_in_bye()
         {          
             var turns = _calendar.CalculateTurnsWithOdd();
 
