@@ -29,7 +29,7 @@ namespace KataFootballChampionship.Test
             var turn1 = new Turn();
             var match1 = new Match("Team A", "Team B");
             turn1.AddMatch(match1);
-            turn1.AddByeTeam("Team C");
+            turn1.AddByeTeam(new Riposo("Team C"));
 
             Assert.That(turns.Contains(turn1));
         }

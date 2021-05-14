@@ -138,9 +138,9 @@ namespace KataFootballChampionship.Core
 
         private void addByeTeam(TeamList teamsInGame, Turn turn)
         {
-            string team = _teamsList.GetByeTeam(teamsInGame);
-            if (!string.IsNullOrEmpty(team))
-                turn.AddByeTeam(team);
+            Riposo team = _teamsList.GetByeTeam(teamsInGame);
+            if (team.AnyTeams())
+                turn.AddByeTeam(new Riposo(team));
         }
 
         static IEnumerable<IEnumerable<T>> GetPermutations<T>(IEnumerable<T> list, int length)

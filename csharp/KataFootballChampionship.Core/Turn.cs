@@ -7,7 +7,7 @@ namespace KataFootballChampionship.Core
     public class Turn : IEquatable<Turn>
     {
         private readonly HashSet<Match> _matches;
-        private string _byeTeam=string.Empty;
+        private Riposo _riposo = new Riposo();        
         private DateTime startDate;
 
         public Turn()
@@ -38,18 +38,18 @@ namespace KataFootballChampionship.Core
             }
 
             return false;
-        }
+        }    
 
-        public void AddByeTeam(string byeteam)
+        public void AddByeTeam(Riposo byeteam)
         {
-            _byeTeam = byeteam;
+            _riposo = byeteam;
         }
 
         public bool Equals(Turn other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            if (!_byeTeam.Equals(other._byeTeam)) return false;
+            if (!_riposo.Equals(other._riposo)) return false;
             //TODO: uguaglianza tiene conto anche della data --> return Equals(_matches, other._matches) && startDate.Equals(other.startDate);
             return _matches.SetEquals(other._matches);
         }
@@ -65,7 +65,7 @@ namespace KataFootballChampionship.Core
         public override int GetHashCode()
         {
             //TODO: hash tiene conto anche della data --> return HashCode.Combine(_matches, startDate);
-            return HashCode.Combine(_matches,_byeTeam);
+            return HashCode.Combine(_matches, _riposo);
         }
         
         public static bool operator ==(Turn left, Turn right)
@@ -85,7 +85,7 @@ namespace KataFootballChampionship.Core
             {
                 stringBuilder.Append($"({match})");                
             }
-            stringBuilder.Append(_byeTeam);
+            stringBuilder.Append(_riposo);
 
             return stringBuilder.ToString();
         }

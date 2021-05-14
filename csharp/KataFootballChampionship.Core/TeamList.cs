@@ -46,12 +46,12 @@ namespace KataFootballChampionship.Core
             AddTeams(team.Team2);
         }
 
-        public string GetByeTeam(TeamList teamsInGame)
+        public Riposo GetByeTeam(TeamList teamsInGame)
         {
-            string teamBye = "";
+            Riposo teamBye = new Riposo();
             var differences = _teamsList.Except(teamsInGame._teamsList).ToList();            
             if (differences.Count > 0)
-                teamBye = differences[0];
+                teamBye = new Riposo(differences[0]);
             return teamBye;
         }
     }
