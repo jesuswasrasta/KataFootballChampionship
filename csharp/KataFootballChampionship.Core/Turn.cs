@@ -7,7 +7,7 @@ namespace KataFootballChampionship.Core
     public class Turn : IEquatable<Turn>
     {
         private readonly HashSet<Match> _matches;
-        private string _byeTeam;
+        private string _byeTeam=string.Empty;
         private DateTime startDate;
 
         public Turn()
