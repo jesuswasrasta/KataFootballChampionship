@@ -100,7 +100,49 @@ namespace KataFootballChampionship.Core
 
             return _turns;
         }
-        
+        public TurnSet CalculateTurnsWithOdd()
+        {            
+            var matches = CalculateMatches();
+            _turns = new TurnSet();
+
+            DateTime dateTurn = StartingDate;
+            for (var i = matches.Count - 1; i >= 0; i--)
+            {
+                TeamList teamsInGame = new TeamList();
+
+                var m1 = matches[i];
+                Turn turn = new Turn(dateTurn);
+                turn.AddMatch(m1);
+                matches.Remove(m1);
+                teamsInGame.AddTeamsMatch(m1);
+
+                for (var j = matches.Count - 1; j >= 0; j--)
+                {
+                    var m2 = matches[j];
+                    if (!turn.ContainsTeam(m2))
+                    {
+                        turn.AddMatch(m2);
+                        matches.Remove(m2);
+                        teamsInGame.AddTeamsMatch(m2);
+                        i--;
+                    }
+                }
+
+                dateTurn = dateTurn.AddDays(7);
+                addByeTeam(teamsInGame, turn);
+                _turns.Add(turn);
+            }
+
+            return _turns;
+        }
+
+        private void addByeTeam(TeamList teamsInGame, Turn turn)
+        {
+            string team = _teamsList.GetByeTeam(teamsInGame);
+            if (!string.IsNullOrEmpty(team))
+                turn.AddByeTeam(team);
+        }
+
         static IEnumerable<IEnumerable<T>> GetPermutations<T>(IEnumerable<T> list, int length)
         {
             if (length == 1) return list.Select(t => new T[] { t });
